@@ -1,0 +1,144 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  margin-top: 10vh;
+  background-color: #e0f0e5;
+  font-family: 'Open Sans', sans-serif;
+}
+
+main {
+  width: 30rem;
+  background-color: aliceblue;
+  box-shadow: rgba(2, 73, 25, 0.3) 0 0 6px;
+}
+
+#submit-button,
+.task-item,
+#clear-button,
+input[type="text"] {
+  min-height: 2.5rem;
+}
+
+.heading,
+.input-task,
+#clear-button {
+  display: flex;
+  width: 100%;
+  border-bottom: 2px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.heading {
+  color: #10a58a;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  justify-content: flex-start;
+}
+.logoicon { 
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+.input-task {
+  background-color: #fff;
+}
+
+input[type="text"] {
+  width: 90%;
+  border: 0;
+  padding-left: 1rem;
+}
+
+.description {
+  overflow-x: hidden;
+}
+
+input[type="text"]:focus,
+.description:focus {
+  outline: none;
+}
+
+input[type="text"]::placeholder {
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+#clear-button {
+  border: 0;
+  justify-content: center;
+  font-size: 1rem;
+  background-color: #37d2b6;
+  color: #fff;
+  cursor: pointer;
+}
+
+#submit-button {
+  border: 0;
+  font-size: 1.5rem;
+  color: #37d2b6;
+  width: 10%;
+  height: 100%;
+  cursor: pointer;
+  background: none;
+}
+
+#tasks {
+  display: flex;
+  flex-direction: column;
+
+  /* padding: 0 1rem; */
+}
+
+.task-item {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  align-items: center;
+  border-bottom: 1px solid #ebe9e9;
+}
+
+.task-item-content {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  margin-left: 1rem;
+}
+
+input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+#tasks li {
+  background-color: #e0f0e5;
+}
+
+#tasks li:nth-child(2n) {
+  background-color: #c3f5eb;
+}
+
+.delete-task {
+  color: #d11a2a;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.mover {
+  margin-right: 1rem;
+}
+
+.mover:hover {
+  cursor: move;
+}
+
+.task-completed {
+  text-decoration: line-through;
+  color: darkgray;
+}
