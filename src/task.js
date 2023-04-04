@@ -1,50 +1,44 @@
+// import toggleCompleted from './interact';
 export default class Task {
   constructor() {
-    this.taskContainer = document.getElementById('tasks');
-    this.clearButton = document.getElementById('clear-button');
-    this.submitButton = document.getElementById('submit-button');
-    this.tasksArray = JSON.parse(localStorage.getItem('tasksArray')) || [];
+    this.taskContainer = document.getElementById("tasks");
+    this.clearButton = document.getElementById("clear-button");
+    this.submitButton = document.getElementById("submit-button");
+    this.tasksArray = JSON.parse(localStorage.getItem("tasksArray")) || [];
+    this.main = document.querySelector(".main");
     this.init();
   }
 
   init() {
     this.tasksArray.forEach((task) => this.displayTasks(task));
-    this.submitButton.addEventListener('click', (btn) => {
-      const description = document.getElementById('task-description').value;
-      if (description === '') {
-        btn.preventDefault();
-      } else {
-        this.addTask(description);
-      }
-    });
-
-    this.taskContainer.addEventListener('click', (event) => {
-      if (event.target.classList.contains('delete-task')) {
+    this.main.addEventListener('click', (event) => {
+      if (event.target.classList.contains("delete-task")) {
         const { index } = event.target.parentElement.parentElement.dataset;
         this.deleteTask(index);
+      } else if (event.target.matches(".submit-button")) {
+        const description = document.getElementById("task-description").value;
+        if (description === "") {
+          event.target.preventDefault();
+        } else {
+          this.addTask(description);
+        }
+      }  else if (event.target.matches("#clear-button")) {
+        this.tasksArray = this.tasksArray.filter((task) => !task.completed);
+        this.reindexTasks();
+        this.displayAllTasks();
+        this.updateLocalStorage();
       }
     });
 
-    this.taskContainer.addEventListener('input', (event) => {
-      if (event.target.classList.contains('description')) {
+    this.taskContainer.addEventListener("input", (event) => {
+      if (event.target.classList.contains("description")) {    
         const { index } = event.target.parentElement.parentElement.dataset;
         const newDescription = event.target.textContent;
         this.editTask(index, newDescription);
-      }
-    });
-
-    this.taskContainer.addEventListener('change', (event) => {
-      if (event.target.classList.contains('checkbox')) {
+      } else if (event.target.classList.contains("checkbox")) {
         const { index } = event.target.parentElement.parentElement.dataset;
         this.toggleCompleted(index);
       }
-    });
-
-    this.clearButton.addEventListener('click', () => {
-      this.tasksArray = this.tasksArray.filter((task) => !task.completed);
-      this.reindexTasks();
-      this.displayAllTasks();
-      this.updateLocalStorage();
     });
   }
 
@@ -79,8 +73,8 @@ export default class Task {
   }
 
   displayTasks(task) {
-    const completedStatus = task.completed ? 'checked' : '';
-    const taskClass = task.completed ? 'task-completed' : '';
+    const completedStatus = task.completed ? "checked" : "";
+    const taskClass = task.completed ? "task-completed" : "";
     this.taskContainer.innerHTML += `
       <li class="task-item" data-index="${task.index}">
         <span class="task-item-content">
@@ -92,16 +86,16 @@ export default class Task {
           <i class="fa mover fa-ellipsis-v" aria-hidden="true"></i>
         </span>
       </li>`;
-    document.getElementById('task-description').value = '';
+    document.getElementById("task-description").value = "";
   }
 
   displayAllTasks() {
-    this.taskContainer.innerHTML = '';
+    this.taskContainer.innerHTML = "";
     this.tasksArray.forEach((task) => this.displayTasks(task));
   }
 
   updateLocalStorage() {
-    localStorage.setItem('tasksArray', JSON.stringify(this.tasksArray));
+    localStorage.setItem("tasksArray", JSON.stringify(this.tasksArray));
   }
 
   toggleCompleted(index) {
