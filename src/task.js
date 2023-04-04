@@ -1,4 +1,3 @@
-// import toggleCompleted from './interact';
 export default class Task {
   constructor() {
     this.taskContainer = document.getElementById("tasks");
